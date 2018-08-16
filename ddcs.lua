@@ -18,10 +18,18 @@ ddcs.documents = {
 			to_send=5,
 			sent=0,
 		} ,
+		["FARP Amtkel"] = {
+			to_send=5,
+			sent=0,
+		} ,
 	},
 	drop = {
 		["test2"] = {
 			to_receive=5,
+			received=0,
+		} ,
+		["FARP Teberda"] = {
+			to_receive=3,
 			received=0,
 		} ,
 	}
@@ -200,7 +208,7 @@ end
 ------------------------------------------------------------------------------
 function ddcs.transportPickupDocumentAction(document, player)
 
-	playerUnit = Unit.getByName(player.unitName)
+	local playerUnit = Unit.getByName(player.unitName)
 
 	if playerUnit:inAir() then
 		trigger.action.outTextForGroup(player.groupId, 'You needs to be on ground to pickup documents', 10)
@@ -227,8 +235,9 @@ function ddcs.transportPickupDocumentAction(document, player)
 	document.sent = document.sent +1
 	ddcs.players[player.unitName].documents.onBoard = 1
 
-	trigger.action.outTextForGroup(player.groupId, 'you picked a document', 10)
-	trigger.action.outTextForGroup(player.groupId, 'transport it to a drop zone', 10)
+	local msg = 'you picked a document, transport it to a drop zone'
+
+	trigger.action.outTextForGroup(player.groupId, msg, 10)
 end
 
 ------------------------------------------------------------------------------
@@ -244,7 +253,7 @@ end
 ------------------------------------------------------------------------------
 function ddcs.transportDropDocumentAction(document, player)
 
-	playerUnit = Unit.getByName(player.unitName)
+	local playerUnit = Unit.getByName(player.unitName)
 
 	if playerUnit:inAir() then
 		trigger.action.outTextForGroup(player.groupId, 'You needs to be stopped on ground to drop documents', 10)
@@ -263,7 +272,7 @@ function ddcs.transportDropDocumentAction(document, player)
 		return
 	end
 	if ddcs.players[player.unitName].documents.onBoard <= 0 then
-		trigger.action.outTextForGroup(player.groupId, 'you don\'t a document on board', 10)
+		trigger.action.outTextForGroup(player.groupId, 'you don\'t have a document on board', 10)
 		return
 	end
 
