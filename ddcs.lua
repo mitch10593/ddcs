@@ -46,7 +46,7 @@ ddcs.templateDocuments = {
 			to_receive=3,
 			received=0,
 		} ,
-		["FARP Aryz"] = {
+		["FARP Arhyz"] = {
 			to_receive=3,
 			received=0,
 		} ,
@@ -61,7 +61,8 @@ ddcs.players = {}
 
 -- aicrafts allowed to transport documents
 ddcs.documentsAllowedTransporters = {
-    ["Yak-52"] = true,
+	["Mi-8MT"] = true,
+	["Yak-52"] = true,
 }
 
 -- aicrafts allowed to transport troups
