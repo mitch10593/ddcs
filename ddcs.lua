@@ -2,11 +2,21 @@
 -- Dynamic DCS
 ------------------------------------------------------------------------------
 
+------------------------------------------------------------------------------
+-- Requirements
+-- need to comment those lines into your DCS/Scripts/MissionScripting.lua file
+-- --sanitizeModule('io')
+-- --sanitizeModule('lfs')
+-- (this change needs DCS restart)
+------------------------------------------------------------------------------
 
 ------------------------------------------------------------------------------
 -- todo
 -- when player crash or quit the game or change slot: reset
--- when arriving in a drop zone (or pickup zone)
+-- advert player when arriving in a drop zone (or pickup zone)
+-- advert player when exiting a drop zone (or pickup zone)
+-- load previous mission state at startup
+-- load current mission state before mission restart (and every x minutes) + backup
 ------------------------------------------------------------------------------
 
 ddcs = {}
@@ -19,7 +29,7 @@ ddcs.documents = {
 			sent=0,
 		} ,
 		["FARP Amtkel"] = {
-			to_send=5,
+			to_send=50,
 			sent=0,
 		} ,
 	},
@@ -29,6 +39,14 @@ ddcs.documents = {
 			received=0,
 		} ,
 		["FARP Teberda"] = {
+			to_receive=3,
+			received=0,
+		} ,
+		["FARP KN77"] = {
+			to_receive=3,
+			received=0,
+		} ,
+		["FARP Aryz"] = {
 			to_receive=3,
 			received=0,
 		} ,
@@ -82,7 +100,18 @@ function ddcs.buildMenu()
 				missionCommands.addCommandForGroup(player.groupId, 'Debug', _tansportDocumentsPath, ddcs.transportDebug, player)
 			end
 		end
+		
 	end
+
+	-- during developpement phase
+	_missionPath = missionCommands.addSubMenu('Mission')
+
+	-- allowed to transport documents ?
+	_missionFilePath = missionCommands.addSubMenu('File', _missionPath)
+
+	missionCommands.addCommand('Status', _missionFilePath, ddcs.missionFileStatus)
+	missionCommands.addCommand('Load', _missionFilePath, ddcs.missionFileLoad)
+	missionCommands.addCommand('Save', _missionFilePath, ddcs.missionFileSave)
 	
 end
 
@@ -353,6 +382,47 @@ function ddcs.initUnit(playerName)
 	}
 
 end
+
+------------------------------------------------------------------------------
+-- DDCS missionFileStatus
+------------------------------------------------------------------------------
+function ddcs.missionFileStatus()
+	trigger.action.outText('@todo missionFileStatus', 10)
+end
+
+------------------------------------------------------------------------------
+-- DDCS missionFileLoad
+------------------------------------------------------------------------------
+function ddcs.missionFileLoad()
+	trigger.action.outText('starting missionFileLoad', 10)
+	ddcs.load()
+	trigger.action.outText('mission loaded', 10)
+end
+
+------------------------------------------------------------------------------
+-- DDCS missionFileLoad
+------------------------------------------------------------------------------
+function ddcs.missionFileSave()
+	trigger.action.outText('starting missionFileSave', 10)
+	ddcs.save()
+	trigger.action.outText('mission saved', 10)
+end
+
+------------------------------------------------------------------------------
+-- DDCS Load previous game state
+------------------------------------------------------------------------------
+function ddcs.load()
+	dofile(lfs.writedir() .. 'logs/documents.lua')
+	ddcs.documents = documents
+end
+
+------------------------------------------------------------------------------
+-- DDCS Save current game state
+------------------------------------------------------------------------------
+function ddcs.save()
+	mist.debug.writeData(mist.utils.serialize,{'documents', ddcs.documents}, 'documents.lua')	
+end
+
 
 -- start DDCS
 ddcs.init()
