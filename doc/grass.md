@@ -1,6 +1,6 @@
 # Grass Runways (and FARPS units)
 
-The script lib/grass.lua help the mission maker to build:
+The script [grass.lua](../lib/grass.lua) help the mission maker to build:
 
 * grass runways (from only one object)
 * FARPS units (tents, trucks, windsock)
@@ -11,7 +11,7 @@ To use Grass Runways features, add grass.lua on mission start
 
 ## Auto build
 
-![map_view](doc/grass/map_view.jpg)
+![map_view](grass/map_view.jpg)
 
 ## Auto build units on FARPS
 
@@ -21,11 +21,11 @@ To use Grass Runways features, add grass.lua on mission start
 
 Blue side:
 
-![map_view](doc/grass/farp_blue.jpg)
+![map_view](grass/farp_blue.jpg)
 
 Red side:
 
-![map_view](doc/grass/farp_red.jpg)
+![map_view](grass/farp_red.jpg)
 
 ## Auto build GRASS RUNWAYS
 
@@ -35,5 +35,5 @@ Red side:
 
 Result sample:
 
-![map_view](doc/grass/runway_cockpit.jpg)
+![map_view](grass/runway_cockpit.jpg)
 
