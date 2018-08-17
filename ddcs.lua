@@ -22,7 +22,7 @@
 ddcs = {}
 
 -- initial documents positions
-ddcs.documents = {
+ddcs.templateDocuments = {
 	pickup = {
 		["test1"] = {
 			to_send=5,
@@ -364,6 +364,14 @@ function ddcs.init()
 	for name, player in pairs(mist.DBs.humansByName) do
 		ddcs.initUnit(name)
 	end
+	
+	-- try to load the mission
+	if ddcs.load() ~= true then
+		-- init mission with template
+		ddcs.documents =  mist.utils.deepCopy(ddcs.templateDocuments)
+		
+		trigger.action.outText('mission initialized from template', 10)	
+	end
 
 	ddcsEventHandler = mist.addEventHandler(ddcs.handleEvents) 
 	
@@ -410,10 +418,19 @@ end
 
 ------------------------------------------------------------------------------
 -- DDCS Load previous game state
+-- @return bool true if ok
 ------------------------------------------------------------------------------
 function ddcs.load()
-	dofile(lfs.writedir() .. 'logs/documents.lua')
-	ddcs.documents = documents
+
+	local fileName = lfs.writedir() .. 'logs/documents.lua'
+	if lfs.attributes(fileName) then
+		dofile(fileName)
+		ddcs.documents = documents
+		trigger.action.outText('mission loaded from file', 10)
+		return true
+	else
+		return false
+	end	
 end
 
 ------------------------------------------------------------------------------
