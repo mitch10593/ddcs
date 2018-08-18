@@ -8,7 +8,7 @@ Copy and paste MissionEditor folder to your DCS root dir (ex: C:\Program Files\E
 
 Mission Editor new combo value for starting type (Ground Take Off / Départ du sol):
 
-[Imgur](https://i.imgur.com/iBQRT02.png)
+![Imgur](https://i.imgur.com/iBQRT02.png)
 
 A Yak-52 spwaned on ground:
 
