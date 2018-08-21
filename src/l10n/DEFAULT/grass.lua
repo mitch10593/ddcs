@@ -26,19 +26,19 @@ function grass.buildGrassRunway(runwayOrigin)
 
 	-- create left origin from right origin
 	local leftOrigin = {
-		x = runwayOrigin.x + width * math.cos(mist.utils.toRadian(angle-90)),
-		y = runwayOrigin.y + width * math.sin(mist.utils.toRadian(angle-90)),
+		["x"] = runwayOrigin.x + width * math.cos(mist.utils.toRadian(angle-90)),
+		["y"] = runwayOrigin.y + width * math.sin(mist.utils.toRadian(angle-90)),
 	}
 
     local template = {
-	    category = runwayOrigin.category,
-        categoryStatic = runwayOrigin.categoryStatic,
-        coalition = runwayOrigin.coalition,
-        country = runwayOrigin.country,
-        countryId = runwayOrigin.countryId,
-        heading = runwayOrigin.heading,
-        shape_name =  runwayOrigin.shape_name,
-        type = runwayOrigin.type,
+	    ["category"] = runwayOrigin.category,
+        ["categoryStatic"] = runwayOrigin.categoryStatic,
+        ["coalition"] = runwayOrigin.coalition,
+        ["country"] = runwayOrigin.country,
+        ["countryId"] = runwayOrigin.countryId,
+        ["heading"] = runwayOrigin.heading,
+        ["shape_name"] =  runwayOrigin.shape_name,
+        ["type"] = runwayOrigin.type,
 	}
 	
 	-- leftOrigin plot
@@ -101,23 +101,23 @@ function grass.buildFarpUnits(farp)
 	local tentDistance=100
 	local tentSpacing=20
 	local tentOrigin = {
-		x = farp.x + tentDistance * math.cos(mist.utils.toRadian(angle)),
-		y = farp.y + tentDistance * math.sin(mist.utils.toRadian(angle)),
+		["x"] = farp.x + tentDistance * math.cos(mist.utils.toRadian(angle)),
+		["y"] = farp.y + tentDistance * math.sin(mist.utils.toRadian(angle)),
 	}
 
 	-- create tents
 	for j = 1,2 do
 		for i = 1,3 do
 			local tent = {
-				category = 'static',
-				categoryStatic = 'Fortifications',
-				coalition = farp.coalition,
-				country = farp.country,
-				countryId = farp.countryId,
-				heading = mist.utils.toRadian(angle-90),
-				type = 'FARP Tent',
-				x = tentOrigin.x + (i-1) * tentSpacing * math.cos(mist.utils.toRadian(angle)) - (j-1) * tentSpacing * math.sin(mist.utils.toRadian(angle)),
-				y = tentOrigin.y + (i-1) * tentSpacing * math.sin(mist.utils.toRadian(angle)) + (j-1) * tentSpacing *  math.cos(mist.utils.toRadian(angle)),
+				["category"] = 'static',
+				["categoryStatic"] = 'Fortifications',
+				["coalition"] = farp.coalition,
+				["country"] = farp.country,
+				["countryId"] = farp.countryId,
+				["heading"] = mist.utils.toRadian(angle-90),
+				["type"] = 'FARP Tent',
+				["x"] = tentOrigin.x + (i-1) * tentSpacing * math.cos(mist.utils.toRadian(angle)) - (j-1) * tentSpacing * math.sin(mist.utils.toRadian(angle)),
+				["y"] = tentOrigin.y + (i-1) * tentSpacing * math.sin(mist.utils.toRadian(angle)) + (j-1) * tentSpacing *  math.cos(mist.utils.toRadian(angle)),
 			}
 			
 			mist.dynAddStatic(tent)
@@ -134,21 +134,21 @@ function grass.buildFarpUnits(farp)
 	local otherSpacing=15
 	local otherDistance=tentDistance-otherSpacing
 	local otherOrigin = {
-		x = farp.x + otherDistance * math.cos(mist.utils.toRadian(angle)),
-		y = farp.y + otherDistance * math.sin(mist.utils.toRadian(angle)),
+		["x"] = farp.x + otherDistance * math.cos(mist.utils.toRadian(angle)),
+		["y"] = farp.y + otherDistance * math.sin(mist.utils.toRadian(angle)),
 	}
 	
 	for j,typeName in ipairs(otherUnits) do
 		local otherUnit = {
-			category = 'static',
-			categoryStatic = 'Fortifications',
-			coalition = farp.coalition,
-			country = farp.country,
-			countryId = farp.countryId,
-			heading = mist.utils.toRadian(angle-90),
-			type = typeName,
-			x = otherOrigin.x - (j-1) * otherSpacing * math.sin(mist.utils.toRadian(angle)),
-			y = otherOrigin.y + (j-1) * otherSpacing * math.cos(mist.utils.toRadian(angle)),
+			["category"] = 'static',
+			["categoryStatic"] = 'Fortifications',
+			["coalition"] = farp.coalition,
+			["country"] = farp.country,
+			["countryId"] = farp.countryId,
+			["heading"] = mist.utils.toRadian(angle-90),
+			["type"] = typeName,
+			["x"] = otherOrigin.x - (j-1) * otherSpacing * math.sin(mist.utils.toRadian(angle)),
+			["y"] = otherOrigin.y + (j-1) * otherSpacing * math.cos(mist.utils.toRadian(angle)),
 		}		
 		mist.dynAddStatic(otherUnit)
 	end
@@ -157,15 +157,15 @@ function grass.buildFarpUnits(farp)
 	local windstockDistance = 50
 	local windstockAngle = 45
 	local windstockUnit = {
-		category = 'static',
-		categoryStatic = 'Fortifications',
-		coalition = farp.coalition,
-		country = farp.country,
-		countryId = farp.countryId,
-		heading = mist.utils.toRadian(angle-90),
-		type = 'H-Windsock_RW',
-		x = farp.x + windstockDistance * math.cos(mist.utils.toRadian(angle+windstockAngle)),
-		y = farp.y + windstockDistance * math.sin(mist.utils.toRadian(angle+windstockAngle)),
+		["category"] = 'static',
+		["categoryStatic"] = 'Fortifications',
+		["coalition"] = farp.coalition,
+		["country"] = farp.country,
+		["countryId"] = farp.countryId,
+		["heading"] = mist.utils.toRadian(angle-90),
+		["type"] = 'H-Windsock_RW',
+		["x"] = farp.x + windstockDistance * math.cos(mist.utils.toRadian(angle+windstockAngle)),
+		["y"] = farp.y + windstockDistance * math.sin(mist.utils.toRadian(angle+windstockAngle)),
 	}
 	mist.dynAddStatic(windstockUnit)
 
@@ -197,20 +197,20 @@ function grass.buildFarpUnits(farp)
 	}
 	
 	local farpEscortGroup = {
-		category = 'vehicle',
-		coalition = farp.coalition,
-		country = farp.country,
-		countryId = farp.countryId,
-		groupName = farp.groupName .. ' escort',
-		units={},
+		["category"] = 'vehicle',
+		["coalition"] = farp.coalition,
+		["country"] = farp.country,
+		["countryId"] = farp.countryId,
+		["groupName"] = farp.groupName .. ' escort',
+		["units"] = {},
 	}		
 	for j,typeName in ipairs(farpEscortUnitsNames[farp.coalition]) do
 		local escrotUnit = {
-			heading = mist.utils.toRadian(angle-135), -- parked \\\\\
-			type = typeName,
-			x = unitsOrigin.x - (j-1) * unitsSpacing * math.sin(mist.utils.toRadian(angle)),
-			y = unitsOrigin.y + (j-1) * unitsSpacing * math.cos(mist.utils.toRadian(angle)),
-			skill = "Random",
+			["heading"] = mist.utils.toRadian(angle-135), -- parked \\\\\
+			["type"] = typeName,
+			["x"] = unitsOrigin.x - (j-1) * unitsSpacing * math.sin(mist.utils.toRadian(angle)),
+			["y"] = unitsOrigin.y + (j-1) * unitsSpacing * math.cos(mist.utils.toRadian(angle)),
+			["skill"] = "Random",
 		}		
 		table.insert(farpEscortGroup.units, escrotUnit)
 

@@ -1,0 +1,7 @@
+mapResource = 
+{
+    ["ResKey_Action_308"] = "marker.lua",
+    ["ResKey_Action_318"] = "ddcs.lua",
+    ["ResKey_Action_100"] = "mist_4_3_74.lua",
+    ["ResKey_Action_345"] = "grass.lua",
+} -- end of mapResource
