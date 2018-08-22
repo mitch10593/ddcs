@@ -9,6 +9,10 @@ this project use some libraries to work
 
 ## Work on this project
 
+Requirements:
+- [git for windows](https://gitforwindows.org/)
+- [7-zip](https://www.7-zip.org/)
+
 ```shell
 git clone https://github.com/mitch10593/ddcs.git
 cd ddcs
@@ -16,13 +20,15 @@ cd ddcs
 
 This project use a workflow to build and extract the Mission .miz file.
 
-After making changes on scripts:
+### After changes on scripts, you need to run:
 
 ```shell
 ./build.sh
 ```
 
-After making changes in mission editor:
+then, you need to open again your mission in DCS World.
+
+### After changes in mission editor (after save), you need to run:
 
 ```shell
 ./extract.sh
