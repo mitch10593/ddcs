@@ -290,9 +290,9 @@ mission =
     }, -- end of ["triggers"]
     ["map"] = 
     {
-        ["centerY"] = 559949.4202857,
-        ["zoom"] = 1744,
-        ["centerX"] = -165370.17171429,
+        ["centerY"] = 587072.16857141,
+        ["zoom"] = 29307,
+        ["centerX"] = -199445.017,
     }, -- end of ["map"]
     ["coalitions"] = 
     {
@@ -3594,8 +3594,8 @@ mission =
                                     {
                                         [1] = 
                                         {
-                                            ["alt"] = 2258,
-                                            ["action"] = "From Ground Area",
+                                            ["alt"] = 4572,
+                                            ["action"] = "Turning Point",
                                             ["alt_type"] = "BARO",
                                             ["properties"] = 
                                             {
@@ -3603,7 +3603,7 @@ mission =
                                                 {
                                                 }, -- end of ["addopt"]
                                             }, -- end of ["properties"]
-                                            ["speed"] = 61.111111111111,
+                                            ["speed"] = 164.44444444444,
                                             ["task"] = 
                                             {
                                                 ["id"] = "ComboTask",
@@ -3632,18 +3632,18 @@ mission =
                                                     }, -- end of ["tasks"]
                                                 }, -- end of ["params"]
                                             }, -- end of ["task"]
-                                            ["type"] = "TakeOffGround",
+                                            ["type"] = "Turning Point",
                                             ["ETA"] = 0,
                                             ["ETA_locked"] = true,
-                                            ["y"] = 585832.00857143,
-                                            ["x"] = -199362.37428572,
+                                            ["y"] = 582198.83314284,
+                                            ["x"] = -200412.148,
                                             ["name"] = "DictKey_WptName_423",
                                             ["formation_template"] = "",
                                             ["speed_locked"] = true,
                                         }, -- end of [1]
                                         [2] = 
                                         {
-                                            ["alt"] = 2258,
+                                            ["alt"] = 4572,
                                             ["action"] = "Turning Point",
                                             ["alt_type"] = "BARO",
                                             ["properties"] = 
@@ -3652,7 +3652,7 @@ mission =
                                                 {
                                                 }, -- end of ["addopt"]
                                             }, -- end of ["properties"]
-                                            ["speed"] = 61.111111111111,
+                                            ["speed"] = 164.44444444444,
                                             ["task"] = 
                                             {
                                                 ["id"] = "ComboTask",
@@ -3664,10 +3664,10 @@ mission =
                                                 }, -- end of ["params"]
                                             }, -- end of ["task"]
                                             ["type"] = "Turning Point",
-                                            ["ETA"] = 0.82286030940683,
+                                            ["ETA"] = 23.933897459613,
                                             ["ETA_locked"] = false,
-                                            ["y"] = 585872.67257142,
-                                            ["x"] = -199391.95657143,
+                                            ["y"] = 586017.11657141,
+                                            ["x"] = -199457.57714286,
                                             ["name"] = "DictKey_WptName_428",
                                             ["formation_template"] = "",
                                             ["speed_locked"] = true,
@@ -3680,11 +3680,11 @@ mission =
                                 {
                                     [1] = 
                                     {
-                                        ["alt"] = 2258,
+                                        ["alt"] = 4572,
                                         ["alt_type"] = "BARO",
                                         ["livery_id"] = "default",
                                         ["skill"] = "Client",
-                                        ["speed"] = 61.111111111111,
+                                        ["speed"] = 164.44444444444,
                                         ["AddPropAircraft"] = 
                                         {
                                             ["EWDispenserTBL"] = 2,
@@ -3692,10 +3692,10 @@ mission =
                                             ["EWDispenserTFR"] = 1,
                                             ["MountNVG"] = false,
                                             ["ForceINSRules"] = false,
-                                            ["EWDispenserTFL"] = 1,
                                             ["RocketBurst"] = 1,
-                                            ["EWDispenserBL"] = 2,
                                             ["WpBullseye"] = 0,
+                                            ["EWDispenserBL"] = 2,
+                                            ["EWDispenserTFL"] = 1,
                                             ["ClockTime"] = 1,
                                             ["EWDispenserTBR"] = 2,
                                         }, -- end of ["AddPropAircraft"]
@@ -3793,8 +3793,8 @@ mission =
                                                     [25] = 344,
                                                     [13] = 269,
                                                     [26] = 385,
-                                                    [7] = 270,
                                                     [27] = 133,
+                                                    [7] = 270,
                                                     [14] = 260,
                                                     [28] = 257.8,
                                                     [23] = 122.1,
@@ -3804,9 +3804,9 @@ mission =
                                             }, -- end of [3]
                                         }, -- end of ["Radio"]
                                         ["unitId"] = 123,
-                                        ["psi"] = -2.1997287945343,
-                                        ["y"] = 585832.00857143,
-                                        ["x"] = -199362.37428572,
+                                        ["psi"] = -1.325817663668,
+                                        ["y"] = 582198.83314284,
+                                        ["x"] = -200412.148,
                                         ["name"] = "DictKey_UnitName_422",
                                         ["payload"] = 
                                         {
@@ -3818,13 +3818,13 @@ mission =
                                             ["chaff"] = 60,
                                             ["gun"] = 100,
                                         }, -- end of ["payload"]
-                                        ["heading"] = 2.1997287945343,
+                                        ["heading"] = 1.325817663668,
                                         ["callsign"] = 105,
                                         ["onboard_num"] = "010",
                                     }, -- end of [1]
                                 }, -- end of ["units"]
-                                ["y"] = 585832.00857143,
-                                ["x"] = -199362.37428572,
+                                ["y"] = 582198.83314284,
+                                ["x"] = -200412.148,
                                 ["name"] = "DictKey_GroupName_421",
                                 ["communication"] = true,
                                 ["start_time"] = 0,
@@ -3888,9 +3888,9 @@ mission =
                                                                         ["type"] = 4,
                                                                         ["AA"] = true,
                                                                         ["callsign"] = "TKR",
-                                                                        ["modeChannel"] = "X",
+                                                                        ["modeChannel"] = "Y",
                                                                         ["channel"] = 1,
-                                                                        ["system"] = 4,
+                                                                        ["system"] = 5,
                                                                         ["bearing"] = true,
                                                                         ["frequency"] = 1088000000,
                                                                     }, -- end of ["params"]
@@ -4033,6 +4033,7 @@ mission =
             }, -- end of ["rules"]
             ["comment"] = "Trigger 1533837110",
             ["eventlist"] = "",
+            ["predicate"] = "triggerOnce",
             ["actions"] = 
             {
                 [1] = 
@@ -4068,20 +4069,19 @@ mission =
                     ["file"] = "ResKey_Action_345",
                 }, -- end of [6]
             }, -- end of ["actions"]
-            ["predicate"] = "triggerOnce",
         }, -- end of [1]
     }, -- end of ["trigrules"]
-    ["currentKey"] = 19559,
+    ["currentKey"] = 19917,
     ["start_time"] = 30600,
     ["forcedOptions"] = 
     {
         ["easyFlight"] = false,
         ["padlock"] = true,
         ["geffect"] = "realistic",
-        ["tips"] = true,
+        ["miniHUD"] = false,
         ["easyRadar"] = false,
         ["optionsView"] = "optview_all",
-        ["miniHUD"] = false,
+        ["tips"] = true,
         ["civTraffic"] = "",
         ["accidental_failures"] = false,
         ["externalViews"] = true,

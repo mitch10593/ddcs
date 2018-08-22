@@ -71,7 +71,7 @@ end
 -- @param float distance in Nm
 -- @param float alt in feet
 ------------------------------------------------------------------------------
-function marker.tankerAction(groupName,fromPositionX,fromPositionY,speed,hdg,distance,alt)
+function marker.tankerAction(groupName, fromPositionX, fromPositionY, speed, hdg ,distance,alt)
 
 	-- prepare LatLong message
 	local fromVec3={x=fromPositionX, y=0, z=fromPositionY}
@@ -91,6 +91,11 @@ function marker.tankerAction(groupName,fromPositionX,fromPositionY,speed,hdg,dis
 	local mission = { 
 		id = 'Mission', 
 		params = { 
+			["communication"] = true,
+			["start_time"] = 0,
+			["frequency"] = 253,
+			["radioSet"] = true,
+			["task"] = "Refueling",
 			route = { 
 				points = { 
 					[1] = { 

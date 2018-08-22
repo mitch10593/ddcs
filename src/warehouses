@@ -6647,6 +6647,50 @@ warehouses =
                     }, -- end of ["wsType"]
                     ["initialAmount"] = 100,
                 }, -- end of [396]
+                [397] = 
+                {
+                    ["wsType"] = 
+                    {
+                        [1] = 4,
+                        [2] = 7,
+                        [3] = 33,
+                        [4] = 33,
+                    }, -- end of ["wsType"]
+                    ["initialAmount"] = 100,
+                }, -- end of [397]
+                [398] = 
+                {
+                    ["wsType"] = 
+                    {
+                        [1] = 4,
+                        [2] = 7,
+                        [3] = 33,
+                        [4] = 34,
+                    }, -- end of ["wsType"]
+                    ["initialAmount"] = 100,
+                }, -- end of [398]
+                [399] = 
+                {
+                    ["wsType"] = 
+                    {
+                        [1] = 4,
+                        [2] = 7,
+                        [3] = 33,
+                        [4] = 35,
+                    }, -- end of ["wsType"]
+                    ["initialAmount"] = 100,
+                }, -- end of [399]
+                [400] = 
+                {
+                    ["wsType"] = 
+                    {
+                        [1] = 4,
+                        [2] = 7,
+                        [3] = 33,
+                        [4] = 37,
+                    }, -- end of ["wsType"]
+                    ["initialAmount"] = 100,
+                }, -- end of [400]
             }, -- end of ["weapons"]
             ["OperatingLevel_Fuel"] = 10,
             ["unlimitedAircrafts"] = false,
