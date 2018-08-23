@@ -102,8 +102,8 @@ function marker.tankerAction(groupName, fromPositionX, fromPositionY, speed, hdg
 		params = { 
 			["communication"] = true,
 			["start_time"] = 0,
-			["frequency"] = 253,
-			["radioSet"] = true,
+			--["frequency"] = 253,
+			--["radioSet"] = true,
 			["task"] = "Refueling",
 			route = { 
 				points = { 
@@ -117,48 +117,6 @@ function marker.tankerAction(groupName, fromPositionX, fromPositionY, speed, hdg
 						["alt_type"] = "BARO", 
 						["speed"] = speed/1.94384,  -- speed in m/s
 						["speed_locked"] = boolean, 
-						["task"] = 
-						{
-							["id"] = "ComboTask",
-							["params"] = 
-							{
-								["tasks"] = 
-								{
-									[1] = 
-									{
-										["enabled"] = true,
-										["auto"] = true,
-										["id"] = "Tanker",
-										["number"] = 1,
-									}, -- end of [1]
-									[2] = 
-									{
-										["enabled"] = true,
-										["auto"] = true,
-										["id"] = "WrappedAction",
-										["number"] = 2,
-										["params"] = 
-										{
-											["action"] = 
-											{
-												["id"] = "ActivateBeacon",
-												["params"] = 
-												{
-													["type"] = 4,
-													["AA"] = true,
-													["callsign"] = "TKR",
-													["modeChannel"] = "Y",
-													["channel"] = 1, -- TACAN channel
-													["system"] = 4, -- System = TACAN
-													["bearing"] = true,
-													["frequency"] = 1088000000,
-												}, -- end of ["params"]
-											}, -- end of ["action"]
-										}, -- end of ["params"]
-									}, -- end of [2]
-								}, -- end of ["tasks"]
-							}, -- end of ["params"]
-						}, -- end of ["task"]
 					}, -- enf of [1]
 					[2] = 
 					{
