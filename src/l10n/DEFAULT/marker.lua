@@ -70,24 +70,40 @@ end
 -- @param float hdg heading (0-359)
 -- @param float distance in Nm
 -- @param float alt in feet
+-- ex: marker.tankerAction("RED-Tanker ARCO", -198019, 578648, 320, 0 , 20, 20000)
 ------------------------------------------------------------------------------
 function marker.tankerAction(groupName, fromPositionX, fromPositionY, speed, hdg ,distance,alt)
+
+	local unitGroup = Group.getByName(groupName)
+	if unitGroup == nil then
+		trigger.action.outText(groupName .. ' not found for TANKER tasking' , 10)
+		return
+	end
 
 	-- prepare LatLong message
 	local fromVec3={x=fromPositionX, y=0, z=fromPositionY}
 	lat, lon = coord.LOtoLL(fromVec3)
 	fromllString = mist.tostringLL(lat, lon, 2)
+
+	local currentPosition = {}
+	-- current group position
+	for iUnit,unit in ipairs(unitGroup:getUnits()) do
+		currentPosition = unit:getPosition().p
+		break
+	end
 	
+	-- starting position
 	local fromPosition = {
 		["x"] = fromPositionX,
 		["y"] = fromPositionY,
 	}
 
+	-- ending position
 	local toPosition = {
 		["x"] = fromPositionX + distance * 0.539957 * math.cos(mist.utils.toRadian(hdg-90)),
 		["y"] = fromPositionY + distance * 0.539957 * math.sin(mist.utils.toRadian(hdg-90)),
 	}
-
+	
 	local mission = { 
 		id = 'Mission', 
 		params = { 
@@ -98,12 +114,13 @@ function marker.tankerAction(groupName, fromPositionX, fromPositionY, speed, hdg
 			["task"] = "Refueling",
 			route = { 
 				points = { 
+					-- first point is current position, to start now Refuel tasking
 					[1] = { 
 						["type"] = "Turning Point",
 						["action"] = "Turning Point",
-						["x"] = fromPosition.x,
-						["y"] = fromPosition.y,
-						["alt"] = alt * 0.3048, -- in meters
+						["x"] = currentPosition.x,
+						["y"] = currentPosition.y,
+						["alt"] = currentPosition.z,
 						["alt_type"] = "BARO", 
 						["speed"] = speed/1.94384,  -- speed in m/s
 						["speed_locked"] = boolean, 
@@ -150,7 +167,18 @@ function marker.tankerAction(groupName, fromPositionX, fromPositionY, speed, hdg
 							}, -- end of ["params"]
 						}, -- end of ["task"]
 					}, -- enf of [1]
-					[2] = 
+					-- first real point (marker position)
+					[2] = { 
+						["type"] = "Turning Point",
+						["action"] = "Turning Point",
+						["x"] = fromPosition.x,
+						["y"] = fromPosition.y,
+						["alt"] = alt * 0.3048, -- in meters
+						["alt_type"] = "BARO", 
+						["speed"] = speed/1.94384,  -- speed in m/s
+						["speed_locked"] = boolean, 
+					}, -- enf of [1]
+					[3] = 
 					{
 						["type"] = "Turning Point",
 						["alt"] = alt * 0.3048, -- in meters
@@ -180,8 +208,8 @@ function marker.tankerAction(groupName, fromPositionX, fromPositionY, speed, hdg
 												["id"] = "SwitchWaypoint",
 												["params"] = 
 												{
-													["goToWaypointIndex"] = 1,
-													["fromWaypointIndex"] = 2,
+													["goToWaypointIndex"] = 2,
+													["fromWaypointIndex"] = 3,
 												}, -- end of ["params"]
 											}, -- end of ["action"]
 										}, -- end of ["params"]
@@ -194,14 +222,10 @@ function marker.tankerAction(groupName, fromPositionX, fromPositionY, speed, hdg
 			} 
 		} 
 	}
-	
-	local group = Group.getByName(groupName)
-	if group ~= nil then
-		group:getController():setTask(mission)
-		trigger.action.outText(groupName .. ' starting tanker mission ' .. fromllString .. ' hdg ' .. hdg .. ', ' .. alt .. ' ft, speed ' .. (speed/1.94384) .. ' knots' , 10)
-	else
-		trigger.action.outText(groupName .. ' not found' , 10)
-	end
+
+	unitGroup:getController():setTask(mission)
+
+	trigger.action.outText(groupName .. ' starting tanker mission ' .. fromllString .. ' hdg ' .. hdg .. ', ' .. alt .. ' ft, speed ' .. (speed/1.94384) .. ' knots' , 10)
 
 end
 
