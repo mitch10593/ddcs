@@ -80,7 +80,7 @@ mission =
             }, -- end of ["func"]
         }, -- end of ["red"]
     }, -- end of ["result"]
-    ["maxDictId"] = 440,
+    ["maxDictId"] = 447,
     ["pictureFileNameN"] = 
     {
     }, -- end of ["pictureFileNameN"]
@@ -290,9 +290,9 @@ mission =
     }, -- end of ["triggers"]
     ["map"] = 
     {
-        ["centerY"] = 587072.16857141,
-        ["zoom"] = 29307,
-        ["centerX"] = -199445.017,
+        ["centerY"] = 590942.87057141,
+        ["zoom"] = 27522,
+        ["centerX"] = -204867.29114286,
     }, -- end of ["map"]
     ["coalitions"] = 
     {
@@ -3692,10 +3692,10 @@ mission =
                                             ["EWDispenserTFR"] = 1,
                                             ["MountNVG"] = false,
                                             ["ForceINSRules"] = false,
-                                            ["RocketBurst"] = 1,
                                             ["WpBullseye"] = 0,
-                                            ["EWDispenserBL"] = 2,
                                             ["EWDispenserTFL"] = 1,
+                                            ["EWDispenserBL"] = 2,
+                                            ["RocketBurst"] = 1,
                                             ["ClockTime"] = 1,
                                             ["EWDispenserTBR"] = 2,
                                         }, -- end of ["AddPropAircraft"]
@@ -3793,8 +3793,8 @@ mission =
                                                     [25] = 344,
                                                     [13] = 269,
                                                     [26] = 385,
-                                                    [27] = 133,
                                                     [7] = 270,
+                                                    [27] = 133,
                                                     [14] = 260,
                                                     [28] = 257.8,
                                                     [23] = 122.1,
@@ -3804,7 +3804,7 @@ mission =
                                             }, -- end of [3]
                                         }, -- end of ["Radio"]
                                         ["unitId"] = 123,
-                                        ["psi"] = -1.325817663668,
+                                        ["psi"] = -1.3258176636687,
                                         ["y"] = 582198.83314284,
                                         ["x"] = -200412.148,
                                         ["name"] = "DictKey_UnitName_422",
@@ -3818,7 +3818,7 @@ mission =
                                             ["chaff"] = 60,
                                             ["gun"] = 100,
                                         }, -- end of ["payload"]
-                                        ["heading"] = 1.325817663668,
+                                        ["heading"] = 1.3258176636687,
                                         ["callsign"] = 105,
                                         ["onboard_num"] = "010",
                                     }, -- end of [1]
@@ -3999,6 +3999,220 @@ mission =
                                 ["start_time"] = 0,
                                 ["frequency"] = 253,
                             }, -- end of [8]
+                            [9] = 
+                            {
+                                ["modulation"] = 0,
+                                ["tasks"] = 
+                                {
+                                }, -- end of ["tasks"]
+                                ["radioSet"] = false,
+                                ["task"] = "CAP",
+                                ["uncontrolled"] = false,
+                                ["route"] = 
+                                {
+                                    ["points"] = 
+                                    {
+                                        [1] = 
+                                        {
+                                            ["alt"] = 6096,
+                                            ["action"] = "Turning Point",
+                                            ["alt_type"] = "BARO",
+                                            ["properties"] = 
+                                            {
+                                                ["addopt"] = 
+                                                {
+                                                }, -- end of ["addopt"]
+                                            }, -- end of ["properties"]
+                                            ["speed"] = 164.44444444444,
+                                            ["task"] = 
+                                            {
+                                                ["id"] = "ComboTask",
+                                                ["params"] = 
+                                                {
+                                                    ["tasks"] = 
+                                                    {
+                                                        [1] = 
+                                                        {
+                                                            ["number"] = 1,
+                                                            ["auto"] = false,
+                                                            ["id"] = "Follow",
+                                                            ["enabled"] = true,
+                                                            ["params"] = 
+                                                            {
+                                                                ["lastWptIndexFlagChangedManually"] = false,
+                                                                ["groupId"] = 100,
+                                                                ["lastWptIndex"] = 2,
+                                                                ["lastWptIndexFlag"] = false,
+                                                                ["pos"] = 
+                                                                {
+                                                                    ["y"] = 0,
+                                                                    ["x"] = -213.36,
+                                                                    ["z"] = 60.96,
+                                                                }, -- end of ["pos"]
+                                                            }, -- end of ["params"]
+                                                        }, -- end of [1]
+                                                        [2] = 
+                                                        {
+                                                            ["number"] = 2,
+                                                            ["auto"] = false,
+                                                            ["id"] = "WrappedAction",
+                                                            ["enabled"] = true,
+                                                            ["params"] = 
+                                                            {
+                                                                ["action"] = 
+                                                                {
+                                                                    ["id"] = "Option",
+                                                                    ["params"] = 
+                                                                    {
+                                                                        ["variantIndex"] = 3,
+                                                                        ["name"] = 5,
+                                                                        ["formationIndex"] = 4,
+                                                                        ["value"] = 262147,
+                                                                    }, -- end of ["params"]
+                                                                }, -- end of ["action"]
+                                                            }, -- end of ["params"]
+                                                        }, -- end of [2]
+                                                    }, -- end of ["tasks"]
+                                                }, -- end of ["params"]
+                                            }, -- end of ["task"]
+                                            ["type"] = "Turning Point",
+                                            ["ETA"] = 0,
+                                            ["ETA_locked"] = true,
+                                            ["y"] = 588874.78885712,
+                                            ["x"] = -205877.74171429,
+                                            ["name"] = "DictKey_WptName_446",
+                                            ["formation_template"] = "",
+                                            ["speed_locked"] = true,
+                                        }, -- end of [1]
+                                    }, -- end of ["points"]
+                                }, -- end of ["route"]
+                                ["groupId"] = 106,
+                                ["hidden"] = false,
+                                ["units"] = 
+                                {
+                                    [1] = 
+                                    {
+                                        ["alt"] = 6096,
+                                        ["hardpoint_racks"] = true,
+                                        ["alt_type"] = "BARO",
+                                        ["skill"] = "High",
+                                        ["speed"] = 164.44444444444,
+                                        ["AddPropAircraft"] = 
+                                        {
+                                            ["NoDDMSensor"] = false,
+                                            ["LaserCode100"] = 6,
+                                            ["LaserCode1"] = 8,
+                                            ["RocketBurst"] = 6,
+                                            ["WpBullseye"] = 0,
+                                            ["ForceINSRules"] = false,
+                                            ["LaserCode10"] = 8,
+                                            ["GunBurst"] = 1,
+                                        }, -- end of ["AddPropAircraft"]
+                                        ["type"] = "M-2000C",
+                                        ["unitId"] = 130,
+                                        ["psi"] = 0,
+                                        ["y"] = 588874.78885712,
+                                        ["x"] = -205877.74171429,
+                                        ["name"] = "DictKey_UnitName_445",
+                                        ["payload"] = 
+                                        {
+                                            ["pylons"] = 
+                                            {
+                                                [1] = 
+                                                {
+                                                    ["CLSID"] = "{MMagicII}",
+                                                }, -- end of [1]
+                                                [2] = 
+                                                {
+                                                    ["CLSID"] = "{Matra_S530D}",
+                                                }, -- end of [2]
+                                                [5] = 
+                                                {
+                                                    ["CLSID"] = "{M2KC_RPL_522}",
+                                                }, -- end of [5]
+                                                [9] = 
+                                                {
+                                                    ["CLSID"] = "{MMagicII}",
+                                                }, -- end of [9]
+                                                [8] = 
+                                                {
+                                                    ["CLSID"] = "{Matra_S530D}",
+                                                }, -- end of [8]
+                                            }, -- end of ["pylons"]
+                                            ["fuel"] = 3165,
+                                            ["flare"] = 16,
+                                            ["chaff"] = 112,
+                                            ["gun"] = 100,
+                                        }, -- end of ["payload"]
+                                        ["heading"] = 0,
+                                        ["callsign"] = 106,
+                                        ["onboard_num"] = "054",
+                                    }, -- end of [1]
+                                    [2] = 
+                                    {
+                                        ["alt"] = 6096,
+                                        ["alt_type"] = "BARO",
+                                        ["skill"] = "High",
+                                        ["speed"] = 164.44444444444,
+                                        ["AddPropAircraft"] = 
+                                        {
+                                            ["NoDDMSensor"] = false,
+                                            ["LaserCode100"] = 6,
+                                            ["LaserCode1"] = 8,
+                                            ["RocketBurst"] = 6,
+                                            ["WpBullseye"] = 0,
+                                            ["ForceINSRules"] = false,
+                                            ["LaserCode10"] = 8,
+                                            ["GunBurst"] = 1,
+                                        }, -- end of ["AddPropAircraft"]
+                                        ["type"] = "M-2000C",
+                                        ["unitId"] = 131,
+                                        ["psi"] = 0,
+                                        ["y"] = 588914.78885712,
+                                        ["x"] = -205917.74171429,
+                                        ["name"] = "DictKey_UnitName_447",
+                                        ["payload"] = 
+                                        {
+                                            ["pylons"] = 
+                                            {
+                                                [1] = 
+                                                {
+                                                    ["CLSID"] = "{MMagicII}",
+                                                }, -- end of [1]
+                                                [2] = 
+                                                {
+                                                    ["CLSID"] = "{Matra_S530D}",
+                                                }, -- end of [2]
+                                                [5] = 
+                                                {
+                                                    ["CLSID"] = "{M2KC_RPL_522}",
+                                                }, -- end of [5]
+                                                [9] = 
+                                                {
+                                                    ["CLSID"] = "{MMagicII}",
+                                                }, -- end of [9]
+                                                [8] = 
+                                                {
+                                                    ["CLSID"] = "{Matra_S530D}",
+                                                }, -- end of [8]
+                                            }, -- end of ["pylons"]
+                                            ["fuel"] = 3165,
+                                            ["flare"] = 16,
+                                            ["chaff"] = 112,
+                                            ["gun"] = 100,
+                                        }, -- end of ["payload"]
+                                        ["heading"] = 0,
+                                        ["callsign"] = 108,
+                                        ["onboard_num"] = "055",
+                                    }, -- end of [2]
+                                }, -- end of ["units"]
+                                ["y"] = 588874.78885712,
+                                ["x"] = -205877.74171429,
+                                ["name"] = "DictKey_GroupName_444",
+                                ["communication"] = true,
+                                ["start_time"] = 0,
+                                ["frequency"] = 251,
+                            }, -- end of [9]
                         }, -- end of ["group"]
                     }, -- end of ["plane"]
                 }, -- end of [8]
@@ -4033,7 +4247,6 @@ mission =
             }, -- end of ["rules"]
             ["comment"] = "Trigger 1533837110",
             ["eventlist"] = "",
-            ["predicate"] = "triggerOnce",
             ["actions"] = 
             {
                 [1] = 
@@ -4069,19 +4282,20 @@ mission =
                     ["file"] = "ResKey_Action_345",
                 }, -- end of [6]
             }, -- end of ["actions"]
+            ["predicate"] = "triggerOnce",
         }, -- end of [1]
     }, -- end of ["trigrules"]
-    ["currentKey"] = 19917,
+    ["currentKey"] = 20303,
     ["start_time"] = 30600,
     ["forcedOptions"] = 
     {
         ["easyFlight"] = false,
         ["padlock"] = true,
         ["geffect"] = "realistic",
-        ["miniHUD"] = false,
+        ["tips"] = true,
         ["easyRadar"] = false,
         ["optionsView"] = "optview_all",
-        ["tips"] = true,
+        ["miniHUD"] = false,
         ["civTraffic"] = "",
         ["accidental_failures"] = false,
         ["externalViews"] = true,
