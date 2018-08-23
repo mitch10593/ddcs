@@ -85,13 +85,6 @@ function marker.tankerAction(groupName, fromPositionX, fromPositionY, speed, hdg
 	lat, lon = coord.LOtoLL(fromVec3)
 	fromllString = mist.tostringLL(lat, lon, 2)
 
-	local currentPosition = {}
-	-- current group position
-	for iUnit,unit in ipairs(unitGroup:getUnits()) do
-		currentPosition = unit:getPosition().p
-		break
-	end
-	
 	-- starting position
 	local fromPosition = {
 		["x"] = fromPositionX,
@@ -114,13 +107,13 @@ function marker.tankerAction(groupName, fromPositionX, fromPositionY, speed, hdg
 			["task"] = "Refueling",
 			route = { 
 				points = { 
-					-- first point is current position, to start now Refuel tasking
+					-- first point
 					[1] = { 
 						["type"] = "Turning Point",
 						["action"] = "Turning Point",
-						["x"] = currentPosition.x,
-						["y"] = currentPosition.y,
-						["alt"] = currentPosition.z,
+						["x"] = fromPosition.x,
+						["y"] = fromPosition.y,
+						["alt"] = alt * 0.3048, -- in meters
 						["alt_type"] = "BARO", 
 						["speed"] = speed/1.94384,  -- speed in m/s
 						["speed_locked"] = boolean, 
@@ -167,18 +160,7 @@ function marker.tankerAction(groupName, fromPositionX, fromPositionY, speed, hdg
 							}, -- end of ["params"]
 						}, -- end of ["task"]
 					}, -- enf of [1]
-					-- first real point (marker position)
-					[2] = { 
-						["type"] = "Turning Point",
-						["action"] = "Turning Point",
-						["x"] = fromPosition.x,
-						["y"] = fromPosition.y,
-						["alt"] = alt * 0.3048, -- in meters
-						["alt_type"] = "BARO", 
-						["speed"] = speed/1.94384,  -- speed in m/s
-						["speed_locked"] = boolean, 
-					}, -- enf of [1]
-					[3] = 
+					[2] = 
 					{
 						["type"] = "Turning Point",
 						["alt"] = alt * 0.3048, -- in meters
@@ -208,8 +190,8 @@ function marker.tankerAction(groupName, fromPositionX, fromPositionY, speed, hdg
 												["id"] = "SwitchWaypoint",
 												["params"] = 
 												{
-													["goToWaypointIndex"] = 2,
-													["fromWaypointIndex"] = 3,
+													["goToWaypointIndex"] = 1,
+													["fromWaypointIndex"] = 2,
 												}, -- end of ["params"]
 											}, -- end of ["action"]
 										}, -- end of ["params"]
@@ -223,7 +205,18 @@ function marker.tankerAction(groupName, fromPositionX, fromPositionY, speed, hdg
 		} 
 	}
 
+	-- replace whole mission
 	unitGroup:getController():setTask(mission)
+	
+	-- but start immediately tanker tasking
+	local taskTanker = {
+							["enabled"] = true,
+							["auto"] = true,
+							["id"] = "Tanker",
+							["number"] = 1,
+						};
+
+	unitGroup:getController():pushTask(taskTanker)
 
 	trigger.action.outText(groupName .. ' starting tanker mission ' .. fromllString .. ' hdg ' .. hdg .. ', ' .. alt .. ' ft, speed ' .. (speed/1.94384) .. ' knots' , 10)
 
