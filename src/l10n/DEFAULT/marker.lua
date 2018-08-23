@@ -70,7 +70,7 @@ end
 -- @param float hdg heading (0-359)
 -- @param float distance in Nm
 -- @param float alt in feet
--- ex: marker.tankerAction("RED-Tanker ARCO", -198019, 578648, 320, 0 , 20, 20000)
+-- ex: marker.tankerAction("RED-Tanker ARCO", -198019, 578648, 320, 0 , 30, 20000)
 ------------------------------------------------------------------------------
 function marker.tankerAction(groupName, fromPositionX, fromPositionY, speed, hdg ,distance,alt)
 
@@ -93,8 +93,8 @@ function marker.tankerAction(groupName, fromPositionX, fromPositionY, speed, hdg
 
 	-- ending position
 	local toPosition = {
-		["x"] = fromPositionX + distance * 0.539957 * math.cos(mist.utils.toRadian(hdg-90)),
-		["y"] = fromPositionY + distance * 0.539957 * math.sin(mist.utils.toRadian(hdg-90)),
+		["x"] = fromPositionX + distance * 1000 * 0.539957 * math.cos(mist.utils.toRadian(hdg)),
+		["y"] = fromPositionY + distance * 1000 * 0.539957 * math.sin(mist.utils.toRadian(hdg)),
 	}
 	
 	local mission = { 
@@ -117,6 +117,48 @@ function marker.tankerAction(groupName, fromPositionX, fromPositionY, speed, hdg
 						["alt_type"] = "BARO", 
 						["speed"] = speed/1.94384,  -- speed in m/s
 						["speed_locked"] = boolean, 
+						["task"] = 
+						{
+							["id"] = "ComboTask",
+							["params"] = 
+							{
+								["tasks"] = 
+								{
+									[1] = 
+									{
+										["enabled"] = true,
+										["auto"] = true,
+										["id"] = "Tanker",
+										["number"] = 1,
+									}, -- end of [1]
+									[2] = 
+									{
+										["enabled"] = true,
+										["auto"] = true,
+										["id"] = "WrappedAction",
+										["number"] = 2,
+										["params"] = 
+										{
+											["action"] = 
+											{
+												["id"] = "ActivateBeacon",
+												["params"] = 
+												{
+													["type"] = 4,
+													["AA"] = true,
+													["callsign"] = "TKR",
+													["modeChannel"] = "Y",
+													["channel"] = 1, -- TACAN channel
+													["system"] = 4, -- System = TACAN
+													["bearing"] = true,
+													["frequency"] = 1088000000,
+												}, -- end of ["params"]
+											}, -- end of ["action"]
+										}, -- end of ["params"]
+									}, -- end of [2]
+								}, -- end of ["tasks"]
+							}, -- end of ["params"]
+						}, -- end of ["task"]
 					}, -- enf of [1]
 					[2] = 
 					{
@@ -174,9 +216,9 @@ function marker.tankerAction(groupName, fromPositionX, fromPositionY, speed, hdg
 							["number"] = 1,
 						};
 
-	unitGroup:getController():pushTask(taskTanker)
+	--unitGroup:getController():pushTask(taskTanker)
 
-	trigger.action.outText(groupName .. ' starting tanker mission ' .. fromllString .. ' hdg ' .. hdg .. ', ' .. alt .. ' ft, speed ' .. (speed/1.94384) .. ' knots' , 10)
+	trigger.action.outText(groupName .. ' starting tanker mission ' .. fromllString .. ' hdg ' .. hdg .. ', distance ' .. distance .. ' Nm ' .. alt .. ' ft, speed ' .. math.floor(speed) .. ' knots' , 10)
 
 end
 
@@ -185,6 +227,7 @@ end
 -- ingame marker command: TANKER(groupName,speed,hdg,distance,alt)
 -- ex ingame: TANKER(ARCO)
 -- ex ingame: TANKER(ARCO,320)
+-- ex ingame: TANKER(RED-Tanker ARCO, 320, 0 , 30, 20000)
 ------------------------------------------------------------------------------
 function marker.tankerCommandEventHandler(event)
 
@@ -266,7 +309,7 @@ function marker.detectMarkers(event)
 
 		-- handle TANKER command (need to be improved)
 		if event.text~=nil and event.text:find('TANKER') then
-			marker.moveCommandEventHandler(event)			
+			marker.tankerCommandEventHandler(event)			
 		end 
 		
 	end 
