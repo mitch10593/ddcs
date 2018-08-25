@@ -21,7 +21,7 @@ function marker.moveCommandEventHandler(event)
 	-- params[1]: MOVE
 	-- params[2]: groupName
 	-- params[3]: speed
-	params = {}
+	local params = {}
 	for v in string.gmatch(event.text, '([^,\(\)]+)') do
 		params[#params+1] = v
 	end
@@ -29,13 +29,19 @@ function marker.moveCommandEventHandler(event)
 	local command=params[1]
 	local groupName=params[2]
 	local speed=params[3]
-	
+
 	-- not really a MOVE command ?
 	if command ~= "MOVE" then
 		-- just exit, skipping this event
 		return
 	end
 
+	local unitGroup = Group.getByName(groupName)
+	if unitGroup == nil then
+		trigger.action.outText(groupName .. ' not found for MOVE tasking' , 10)
+		return
+	end
+	
 	-- new route point
 	local newWaypoint = {
 		["action"] = "Turning Point",
@@ -90,13 +96,13 @@ function marker.tankerAction(groupName, fromPositionX, fromPositionY, speed, hdg
 		["x"] = fromPositionX,
 		["y"] = fromPositionY,
 	}
-
+	
 	-- ending position
 	local toPosition = {
 		["x"] = fromPositionX + distance * 1000 * 0.539957 * math.cos(mist.utils.toRadian(hdg)),
 		["y"] = fromPositionY + distance * 1000 * 0.539957 * math.sin(mist.utils.toRadian(hdg)),
 	}
-	
+
 	local mission = { 
 		id = 'Mission', 
 		params = { 
@@ -131,38 +137,13 @@ function marker.tankerAction(groupName, fromPositionX, fromPositionY, speed, hdg
 										["id"] = "Tanker",
 										["number"] = 1,
 									}, -- end of [1]
-									[2] = 
-									{
-										["enabled"] = true,
-										["auto"] = true,
-										["id"] = "WrappedAction",
-										["number"] = 2,
-										["params"] = 
-										{
-											["action"] = 
-											{
-												["id"] = "ActivateBeacon",
-												["params"] = 
-												{
-													["type"] = 4,
-													["AA"] = true,
-													["callsign"] = "TKR",
-													["modeChannel"] = "Y",
-													["channel"] = 1, -- TACAN channel
-													["system"] = 4, -- System = TACAN
-													["bearing"] = true,
-													["frequency"] = 1088000000,
-												}, -- end of ["params"]
-											}, -- end of ["action"]
-										}, -- end of ["params"]
-									}, -- end of [2]
 								}, -- end of ["tasks"]
 							}, -- end of ["params"]
 						}, -- end of ["task"]
 					}, -- enf of [1]
 					[2] = 
 					{
-						["type"] = "Turning Point",
+						["type"] = "Turning Poin t",
 						["alt"] = alt * 0.3048, -- in meters
 						["action"] = "Turning Point",
 						["alt_type"] = "BARO",
@@ -227,7 +208,9 @@ end
 -- ingame marker command: TANKER(groupName,speed,hdg,distance,alt)
 -- ex ingame: TANKER(ARCO)
 -- ex ingame: TANKER(ARCO,320)
--- ex ingame: TANKER(RED-Tanker ARCO, 320, 0 , 30, 20000)
+-- ex ingame: TANKER(ARCO,320,270)
+-- ex ingame: TANKER(ARCO,320,90,25)
+-- ex ingame: TANKER(RED-Tanker ARCO,320,0,30,20000)
 ------------------------------------------------------------------------------
 function marker.tankerCommandEventHandler(event)
 
@@ -238,16 +221,19 @@ function marker.tankerCommandEventHandler(event)
 	-- params[3]: hdg
 	-- params[3]: distance
 	-- params[3]: alt
-	params = {
+	local params = {
 		[1]=nil,
 		[2]=nil,
 		[3]=320,   -- in knots
-		[4]=270,   -- in degrees 0-359
+		[4]=0,     -- in degrees 0-359
 		[5]=20,    -- in Nm
 		[6]=20000, -- in feet
 	}
+	
+	local iparam = 1
 	for v in string.gmatch(event.text, '([^,\(\)]+)') do
-		params[#params+1] = v
+		params[iparam] = v
+		iparam = iparam + 1
 	end
 	
 	local command=params[1]
@@ -273,13 +259,13 @@ end
 -- display debug informations about this marker event
 ------------------------------------------------------------------------------
 function marker.debugEvent(event)
-	vec3={x=event.pos.z, y=event.pos.y, z=event.pos.x}
+	local vec3={x=event.pos.z, y=event.pos.y, z=event.pos.x}
 
-	mgrs = coord.LLtoMGRS(coord.LOtoLL(vec3))
-	mgrsString = mist.tostringMGRS(mgrs, 3)   
+	local mgrs = coord.LLtoMGRS(coord.LOtoLL(vec3))
+	local mgrsString = mist.tostringMGRS(mgrs, 3)   
 
 	lat, lon = coord.LOtoLL(vec3)
-	llString = mist.tostringLL(lat, lon, 2)
+	local llString = mist.tostringLL(lat, lon, 2)
 
 	-- display debug information
 	msg='Marker changed: \'' .. event.text ..'\' on this position \n' 
@@ -320,4 +306,3 @@ mist.removeEventHandler(markerDetectMarkersEventHandler)
 
 -- init markers event handlers
 markerDetectMarkersEventHandler=mist.addEventHandler(marker.detectMarkers) 
-
