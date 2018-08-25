@@ -11,30 +11,13 @@ marker = {}
 marker.debug = false
 
 ------------------------------------------------------------------------------
--- marker.moveCommandEventHandler
--- ingame marker command: MOVE(groupName,speed)
--- ex ingame: MOVE(CVN,10)
+-- marker.moveAction
+-- @param string groupName the group name to move on
+-- @param float toPositionX
+-- @param float toPositionY
+-- @param float speed in knots
 ------------------------------------------------------------------------------
-function marker.moveCommandEventHandler(event)
-
-	-- parse the command: MOVE(groupName,speed)
-	-- params[1]: MOVE
-	-- params[2]: groupName
-	-- params[3]: speed
-	local params = {}
-	for v in string.gmatch(event.text, '([^,\(\)]+)') do
-		params[#params+1] = v
-	end
-	
-	local command=params[1]
-	local groupName=params[2]
-	local speed=params[3]
-
-	-- not really a MOVE command ?
-	if command ~= "MOVE" then
-		-- just exit, skipping this event
-		return
-	end
+function marker.moveAction(groupName, toPositionX, toPositionY, speed)
 
 	local unitGroup = Group.getByName(groupName)
 	if unitGroup == nil then
@@ -48,14 +31,14 @@ function marker.moveCommandEventHandler(event)
 		["alt"] = 0,
 		["alt_type"] = "BARO",
 		["form"] = "Turning Point",
-		["speed"] = speed,
+		["speed"] = speed/1.94384,  -- speed in m/s
 		["type"] = "Turning Point",
-		["x"] = event.pos.z,
-		["y"] = event.pos.x
+		["x"] = toPositionX,
+		["y"] = toPositionY,
 	}
 
 	-- prepare LatLong message
-	local vec3={x=event.pos.z, y=event.pos.y, z=event.pos.x}
+	local vec3={x=toPositionY, y=0, z=toPositionY}
 	lat, lon = coord.LOtoLL(vec3)
 	llString = mist.tostringLL(lat, lon, 2)
 	
@@ -63,7 +46,45 @@ function marker.moveCommandEventHandler(event)
 	mist.goRoute(groupName, {newWaypoint})
 	
 	-- and advise players that the group is moving to a new position
-	trigger.action.outText(groupName .. ' moving to ' .. llString .. ' at speed ' .. speed .. ' m/s' , 10)
+	trigger.action.outText(groupName .. ' moving to ' .. llString .. ' at speed ' .. speed .. ' kts' , 10)
+end
+
+------------------------------------------------------------------------------
+-- marker.moveCommandEventHandler
+-- ingame marker command: MOVE(groupName,speed)
+-- 
+-- ex ingame: MOVE(CVN,10)
+------------------------------------------------------------------------------
+function marker.moveCommandEventHandler(event)
+
+	-- parse the command: MOVE(groupName,speed)
+	-- params[1]: MOVE
+	-- params[2]: groupName
+	-- params[3]: speed
+
+	local params = {
+		[1]=nil,
+		[2]=nil,
+		[3]=20,   -- default speed in knots
+	}
+	
+	local iparam = 1
+	for v in string.gmatch(event.text, '([^,\(\)]+)') do
+		params[iparam] = v
+		iparam = iparam + 1
+	end
+	
+	local command=params[1]
+	local groupName=params[2]
+	local speed=params[3]
+
+	-- not really a MOVE command ?
+	if command ~= "MOVE" then
+		-- just exit, skipping this event
+		return
+	end
+
+	marker.moveAction(groupName,event.pos.z, event.pos.x, speed)
 
 end
 
@@ -189,16 +210,6 @@ function marker.tankerAction(groupName, fromPositionX, fromPositionY, speed, hdg
 	-- replace whole mission
 	unitGroup:getController():setTask(mission)
 	
-	-- but start immediately tanker tasking
-	local taskTanker = {
-							["enabled"] = true,
-							["auto"] = true,
-							["id"] = "Tanker",
-							["number"] = 1,
-						};
-
-	--unitGroup:getController():pushTask(taskTanker)
-
 	trigger.action.outText(groupName .. ' starting tanker mission ' .. fromllString .. ' hdg ' .. hdg .. ', distance ' .. distance .. ' Nm ' .. alt .. ' ft, speed ' .. math.floor(speed) .. ' knots' , 10)
 
 end
